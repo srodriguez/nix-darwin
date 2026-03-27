@@ -18,6 +18,7 @@
       environment.systemPackages =
         [
           pkgs.neovim
+          pkgs.obsidian
         ];
 
       fonts.packages = [
