@@ -16,8 +16,11 @@
     fzf # fuzzy finder
     ripgrep # Grep tool (required by vim)
     zoxide # better cd
-    git-delta # better diff tool
+    delta # better diff tool for git
     tlrc # user-friendly man pages
+
+
+    cargo # need to build lsps
   ];
 }
 
