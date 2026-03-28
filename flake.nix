@@ -66,6 +66,7 @@
         configuration 
         ./modules/terminal.nix
         ./modules/dev-common.nix
+        ./modules/writing-research.nix
       ];
     };
   };
