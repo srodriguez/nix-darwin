@@ -32,6 +32,17 @@
       # https://mynixos.com/nix-darwin/options/system.defaults
       system.defaults = {
         dock.autohide = true;
+#top right corner hot action : 4: Desktop
+        dock.wvous-tr-corner = 4;
+        dock.persistent-apps = [
+        #"${pkgs.obsidian}/Applications/Obsidian.app"
+        "/Applications/Nix Apps/Obsidian.app"
+
+        ];
+
+        finder.FXPreferredViewStyle = "clmv";
+        loginwindow.GuestEnabled = false;
+
       };
 
       # Necessary for using flakes on this system.
