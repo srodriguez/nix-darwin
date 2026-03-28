@@ -5,22 +5,16 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     configuration = { pkgs, ... }: {
+
       # Allow UnFree packages (e.g. obsidian)
       nixpkgs.config.allowUnfree = true;
 
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [
-          pkgs.neovim
-          pkgs.obsidian
-          pkgs.cargo # need to build lsps
-        ];
 
       fonts.packages = [
         pkgs.nerd-fonts.jetbrains-mono
@@ -33,7 +27,7 @@
       # https://mynixos.com/nix-darwin/options/system.defaults
       system.defaults = {
         dock.autohide = true;
-#top right corner hot action : 4: Desktop
+        #top right corner hot action : 4: Desktop
         dock.wvous-tr-corner = 4;
         dock.persistent-apps = [
         #"${pkgs.obsidian}/Applications/Obsidian.app"
@@ -68,7 +62,11 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#MB14
     darwinConfigurations."MB14" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+      modules = [
+        configuration 
+        ./modules/terminal.nix
+        ./modules/dev-common.nix
+      ];
     };
   };
 }
