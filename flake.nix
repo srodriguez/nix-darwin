@@ -8,7 +8,7 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew}:
   let
     configuration = { pkgs, ... }: {
 
@@ -27,12 +27,12 @@
       # https://mynixos.com/nix-darwin/options/system.defaults
       system.defaults = {
         dock.autohide = true;
+        dock.orientation = "right";
         #top right corner hot action : 4: Desktop
         dock.wvous-tr-corner = 4;
         dock.persistent-apps = [
-        #"${pkgs.obsidian}/Applications/Obsidian.app"
-        "/Applications/Nix Apps/Obsidian.app"
-
+          "/Applications/Nix Apps/Obsidian.app"
+          "/Applications/Nix Apps/Zotero.app"
         ];
 
         finder.FXPreferredViewStyle = "clmv";
