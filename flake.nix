@@ -19,6 +19,7 @@
         [
           pkgs.neovim
           pkgs.obsidian
+          pkgs.cargo # need to build lsps
         ];
 
       fonts.packages = [
