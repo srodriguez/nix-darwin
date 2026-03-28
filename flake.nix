@@ -25,6 +25,15 @@
         pkgs.nerd-fonts.jetbrains-mono
       ];
 
+      system.primaryUser = "srodriguez";
+
+      # See documentation : https://mynixos.com/
+      # https://mynixos.com/nix-darwin/options
+      # https://mynixos.com/nix-darwin/options/system.defaults
+      system.defaults = {
+        dock.autohide = true;
+      };
+
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
