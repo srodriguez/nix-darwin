@@ -21,6 +21,10 @@
 
 
     cargo # need to build lsps
+
+    # Terminal Emulators
+    tmux
+    wezterm
   ];
 }
 
