@@ -6,9 +6,18 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew}:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew,homebrew-core, homebrew-cask,}:
   let
     configuration = { pkgs, ... }: {
 
@@ -31,6 +40,8 @@
         #top right corner hot action : 4: Desktop
         dock.wvous-tr-corner = 4;
         dock.persistent-apps = [
+          "/Applications/Nix Apps/Firefox.app"
+          "/Applications/Nix Apps/WezTerm.app"
           "/Applications/Nix Apps/Obsidian.app"
           "/Applications/Nix Apps/Zotero.app"
         ];
@@ -66,7 +77,37 @@
         configuration 
         ./modules/terminal.nix
         ./modules/dev-common.nix
+        ./modules/desktop-tools.nix
         ./modules/writing-research.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            # Install Homebrew under the default prefix
+            enable = true;
+
+            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+            enableRosetta = true;
+
+            # User owning the Homebrew prefix
+            user = "srodriguez";
+
+            # Optional: Declarative tap management
+            taps = {
+              "homebrew/homebrew-core" = homebrew-core;
+              "homebrew/homebrew-cask" = homebrew-cask;
+            };
+
+            # Optional: Enable fully-declarative tap management
+            #
+            # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+            mutableTaps = true;
+
+
+            # Set nix-homebrew.autoMigrate = true; to allow nix-homebrew to migrate the installation
+            # During auto-migration, nix-homebrew will delete the existing installation while keeping installed packages.
+            autoMigrate = true;
+          };
+        }
       ];
     };
   };
