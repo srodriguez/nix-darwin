@@ -17,7 +17,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew,homebrew-core, homebrew-cask,}:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew,homebrew-core, homebrew-cask}:
   let
     configuration = { pkgs, ... }: {
 
@@ -73,12 +73,14 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#MB14
     darwinConfigurations."MB14" = nix-darwin.lib.darwinSystem {
+      specialArgs = { username = "srodriguez"; };
       modules = [
         configuration 
         ./modules/terminal.nix
         ./modules/dev-common.nix
         ./modules/desktop-tools.nix
         ./modules/writing-research.nix
+        ./modules/containers.nix
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {

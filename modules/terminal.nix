@@ -19,12 +19,17 @@
     delta # better diff tool for git
     tlrc # user-friendly man pages
 
-
+    direnv # Enable flakes on directory entry
     cargo # need to build lsps
 
     # Terminal Emulators
     tmux
     wezterm
+    kitty
   ];
+
+   # Enable nix-direnv integration
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 }
 
