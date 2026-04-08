@@ -16,6 +16,7 @@
           "/Applications/Nix Apps/WezTerm.app"
           "/System/Applications/Reminders.app"
           "/Applications/Microsoft Teams.app"
+          "/System/Applications/Calendar.app"
           "/Applications/Nix Apps/Obsidian.app"
           "/Applications/Nix Apps/Zotero.app"
         ];
