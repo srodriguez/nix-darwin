@@ -42,6 +42,8 @@
         dock.persistent-apps = [
           "/Applications/Nix Apps/Firefox.app"
           "/Applications/Nix Apps/WezTerm.app"
+          "/System/Applications/Reminders.app"
+          "/Applications/Microsoft Teams.app"
           "/Applications/Nix Apps/Obsidian.app"
           "/Applications/Nix Apps/Zotero.app"
         ];
